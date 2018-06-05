@@ -1,8 +1,8 @@
 'use strict';
 
 // Mock global `document` object.
-const { createElement } = require('./helpers');
-global.document = { createElement };
+const { createElement, cssText2props, equals } = require('./helpers');
+if (!global.document) global.document = { createElement };
 
 const test = require('tape');
 const { default: printBadge, Style } = require('../dist/console.badge.cjs.js');
@@ -56,7 +56,8 @@ test('Print colored badge with style=for-the-badge', t => {
 function compare(t, actual, expected) {
   t.equal(actual.length, actual.length, 'Params count matches');
   actual.forEach((input, i) => {
-    t.equal(input, expected[i], `${toOrdinal(i + 1)} param matches`);
+    const result = equals(cssText2props(input), cssText2props(expected[i]));
+    t.ok(result, `${toOrdinal(i + 1)} param matches`);
   });
 }
 

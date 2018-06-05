@@ -11,6 +11,7 @@
     "build": "bili",
     "pretest": "npm run build",
     "test": "tape test/test.js | tap-spec",
+    "test:browser": "airtap --local -- test/test.js",
     "test:debug": "node --inspect-brk node_modules/.bin/tape test/test.js | tap-spec",
     "prepublish": "npm run build",
     "clean": "del-cli dist/* !dist/.gitkeep"
@@ -36,6 +37,7 @@
   },
   "homepage": "https://github.com/vladimyr/console.badge",
   "devDependencies": {
+    "airtap": "0.0.7",
     "bili": "^3.1.2",
     "cssom": "^0.3.2",
     "del-cli": "^1.1.0",
