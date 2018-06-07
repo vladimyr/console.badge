@@ -8,6 +8,8 @@ const test = require('tape');
 const { default: printBadge, Style } = require('../dist/console.badge.cjs.js');
 const { toOrdinal } = require('ordinal-js');
 
+const isBrowser = typeof window === 'object';
+
 test('Print colored badge with style=flat', t => {
   const expected = [
     '%c vue-devtools %c Detected Vue v2.4.5 %c',
@@ -17,6 +19,7 @@ test('Print colored badge with style=flat', t => {
   ];
   stub(console, 'log', (...actual) => {
     console.log.restore();
+    if (isBrowser) console.log(...actual);
     compare(t, actual, expected);
     t.end();
   });
@@ -32,6 +35,7 @@ test('Print colored badge with style=flat-square', t => {
   ];
   stub(console, 'log', (...actual) => {
     console.log.restore();
+    if (isBrowser) console.log(...actual);
     compare(t, actual, expected);
     t.end();
   });
@@ -47,6 +51,7 @@ test('Print colored badge with style=for-the-badge', t => {
   ];
   stub(console, 'log', (...actual) => {
     console.log.restore();
+    if (isBrowser) console.log(...actual);
     compare(t, actual, expected);
     t.end();
   });
